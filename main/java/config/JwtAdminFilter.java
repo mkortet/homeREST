@@ -29,6 +29,9 @@ public class JwtAdminFilter extends GenericFilterBean {
 		final HttpServletRequest request = (HttpServletRequest) req;
 		final HttpServletResponse response = (HttpServletResponse) res;
 		final String authHeader = request.getHeader("authorization");
+		
+		if (keyStorePwd.equals("default"))
+			throw new ServletException("Change JWT password (application.properties file)");
 
 		if ("OPTIONS".equals(request.getMethod())) {
 			response.setStatus(HttpServletResponse.SC_OK);

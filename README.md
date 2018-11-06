@@ -2,4 +2,4 @@
 
 REST based home automation / IoT Java Spring application. Currently under heave development (pre-alpha).
 
-![System](/images/homeREST.jpg?raw=true "diagram")
+![System description](images/homeREST.png?raw=true "diagram")

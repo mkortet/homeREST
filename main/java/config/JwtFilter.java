@@ -18,8 +18,8 @@ import com.auth0.jwt.exceptions.SignatureVerificationException;
 
 public class JwtFilter extends GenericFilterBean {
 	
-	@Value("${server.ssl.key-store-password}")
-	private String keyStorePwd;
+	@Value("${jwt.password}")
+	private String jwtPass;
 	
 	public void doFilter(final ServletRequest req, final ServletResponse res, final FilterChain chain)
 			throws IOException, ServletException {
@@ -28,7 +28,7 @@ public class JwtFilter extends GenericFilterBean {
 		final HttpServletResponse response = (HttpServletResponse) res;
 		final String authHeader = request.getHeader("authorization");
 		
-		if (keyStorePwd.equals("default"))
+		if (jwtPass.equals("default"))
 			throw new ServletException("Change JWT password (application.properties file)");
 
 		if ("OPTIONS".equals(request.getMethod())) {
@@ -44,7 +44,7 @@ public class JwtFilter extends GenericFilterBean {
 			final String token = authHeader.substring(7);
 
 			try {
-				JWT.require(Algorithm.HMAC256(keyStorePwd)).build().verify(token);
+				JWT.require(Algorithm.HMAC256(jwtPass)).build().verify(token);
 			} catch (SignatureVerificationException e) {
 				throw new ServletException("Invalid token");
 			}

@@ -20,8 +20,8 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 
 public class JwtAdminFilter extends GenericFilterBean {
 	
-	@Value("${server.ssl.key-store-password}")
-	private String keyStorePwd;
+	@Value("${jwt.password}")
+	private String jwtPass;
 	
 	public void doFilter(final ServletRequest req, final ServletResponse res, final FilterChain chain)
 			throws IOException, ServletException {
@@ -30,7 +30,7 @@ public class JwtAdminFilter extends GenericFilterBean {
 		final HttpServletResponse response = (HttpServletResponse) res;
 		final String authHeader = request.getHeader("authorization");
 		
-		if (keyStorePwd.equals("default"))
+		if (jwtPass.equals("default"))
 			throw new ServletException("Change JWT password (application.properties file)");
 
 		if ("OPTIONS".equals(request.getMethod())) {
@@ -47,7 +47,7 @@ public class JwtAdminFilter extends GenericFilterBean {
 
 			DecodedJWT jwt;
 			try {
-				jwt = JWT.require(Algorithm.HMAC256(keyStorePwd)).build().verify(token);
+				jwt = JWT.require(Algorithm.HMAC256(jwtPass)).build().verify(token);
 			} catch (SignatureVerificationException e) {
 				throw new ServletException("Invalid token");
 			}

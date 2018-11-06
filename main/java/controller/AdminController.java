@@ -43,15 +43,14 @@ public class AdminController {
 	public @ResponseBody StatusMsg addPerson(@RequestBody Person p) {
 		boolean match;
 		
-		match = p.getUserName() != null && p.getUserName().equals("admin");
-		match &= p.getAdmin() != null && p.getAdmin().equals("true");
+		match = p.getUserName() != null && !p.getUserName().isEmpty();
 		
 		if (match) {
 			pr.save(p);
 			return StatusMsg.ok();
 		}
 		
-		return StatusMsg.nok("Bad parameters; username or admin not valid");
+		return StatusMsg.nok("Bad parameter; username not valid");
 	}
 	
 	@RequestMapping(value = "/user/changePwd", method = RequestMethod.POST)

@@ -135,7 +135,7 @@ public class LoginControllerUnitTests {
 				).andDo(print())
 			.andExpect(status().isOk())
 			.andExpect(jsonPath("$.status", is("OK")))
-			.andExpect(jsonPath("$.message", is(new JWTUtil(getValidUser()).createToken())));
+			.andExpect(jsonPath("$.message", is(new JWTUtil(getValidUser()).createTokenString())));
 			
 		
 		verify(personRepositoryMock, times(1)).findByUserName(Mockito.anyString());

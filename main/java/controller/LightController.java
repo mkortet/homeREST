@@ -1,14 +1,5 @@
 package controller;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.nio.charset.MalformedInputException;
-
-import javax.net.ssl.HttpsURLConnection;
-
-import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,7 +36,7 @@ public class LightController {
 		if (r != null) {
 		
 			try {
-				ret = new HttpsJsonPowerOnOff(r.getIpAddr(), r.getPower()).connect();
+				ret = new HttpsJsonPowerOnOff(r.getIpAddr(), d.getPower()).connect();
 				
 				if (ret.contains("OK"))
 					return StatusMsg.ok();

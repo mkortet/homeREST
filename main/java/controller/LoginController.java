@@ -55,7 +55,7 @@ public class LoginController {
 		match &= p.getPassWord().equals(person.getPassWord());
 		
 		if (match) {
-			token = new JWTUtil(person).createToken();
+			token = JWTUtil.getJWT(person).createTokenString();
 			return StatusMsg.ok(token);
 		}
 		
@@ -70,7 +70,7 @@ public class LoginController {
 		match &= d.getType() != null && isRegistered(d);
 		
 		if (match) {
-			return StatusMsg.ok(new JWTUtil(d).createToken());
+			return StatusMsg.ok(JWTUtil.getJWT(d).createTokenString());
 		}
 		else {
 			return StatusMsg.nok("Wrong device parameters or device not registered");

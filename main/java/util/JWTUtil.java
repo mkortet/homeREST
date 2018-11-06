@@ -21,15 +21,24 @@ public class JWTUtil {
 	private String pass;
 
 	
-	public JWTUtil(Device d) {
-		this.d = d;
+	public static JWTUtil getJWT(Device d) {
+		JWTUtil jUtil = new JWTUtil();
+		
+		jUtil.setD(d);
+		
+		return jUtil;
 	}
 	
-	public JWTUtil(Person p) {
-		this.p = p;
+	public static JWTUtil getJWT(Person p) {
+		JWTUtil jUtil = new JWTUtil();
+		
+		jUtil.setP(p);
+		return jUtil;
 	}
 	
-	public String createToken() {
+	public JWTUtil() {}
+		
+	public String createTokenString() {
 		
 		if (p == null && d == null)
 			return "";
@@ -60,5 +69,13 @@ public class JWTUtil {
 			
 			return this.token;
 		}
+	}
+
+	public void setD(Device d) {
+		this.d = d;
+	}
+
+	public void setP(Person p) {
+		this.p = p;
 	}
 }

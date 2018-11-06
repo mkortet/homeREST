@@ -16,7 +16,6 @@ import model.PersonRepository;
 import model.LightDevice;
 import model.LightRepository;
 import model.StatusMsg;
-import util.JWTUtil;
 
 
 @RestController

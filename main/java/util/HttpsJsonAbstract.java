@@ -23,6 +23,7 @@ public abstract class HttpsJsonAbstract {
 	
 	public void setJSON(JSONObject json) {this.json = json;}
 	
+	// @TODO FIXME Return from the device needs to be formatted correctly
 	public String connect() throws IOException, JSONException {
 		StringBuilder sb = new StringBuilder();  
 		con = (HttpsURLConnection) url.openConnection();
